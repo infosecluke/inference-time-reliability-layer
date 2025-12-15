@@ -19,7 +19,7 @@ flowchart LR
     V --> G[Confidence Gating]
     G --> F[Final Response]
     F --> L[Logging & Evals]
-
+```
 
 Example: implying that an NFL divisional game “might not occur” because its Week 18 time is TBD. Divisional opponents play twice every season. The game’s time may be unknown; the game itself is guaranteed.
 
