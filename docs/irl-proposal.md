@@ -4,6 +4,25 @@
 ### Executive Summary
 Large language models still produce occasional errors that users experience as “careless” or “silly.” These are not subtle factual disagreements but violations of basic structural rules in well-defined domains.
 
+## IRL Architecture Overview
+
+flowchart LR
+    U[User Query] --> M[LLM Draft Response]
+
+    M --> D[Domain Detection]
+    D -->|Structured Domain| C[Claim Extraction]
+    D -->|Unstructured Domain| F[Final Response]
+
+    C --> I[Invariant Validation]
+    I -->|Violation| R[Draft Revision]
+    R --> M
+
+    I -->|Pass| V[Selective Verification]
+    V --> G[Confidence Gating]
+
+    G --> F[Final Response]
+    F --> L[Logging & Evals]
+
 Example: implying that an NFL divisional game “might not occur” because its Week 18 time is TBD. Divisional opponents play twice every season. The game’s time may be unknown; the game itself is guaranteed.
 
 This proposal argues that these failures are not training problems. They are systems problems. The most direct fix is an inference-time Reliability Layer that enforces domain invariants, performs selective verification, and gates confidence.
